@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue!!!</title>
+    <link rel="stylesheet" href="styling.css" />
+  </head>
+  <body>
+    <div id="app">
+      <label>Add task <input type="text" v-model="newTask.title" /> </label>
+
+      <ul>
+        <li v-for="todo, index in todoList">
+          <span :class="{important: todo.important, complete: todo.done}">
+            {{todo.title}}</span
+          >
+          <a href="#" @click="removeTask(index)">remove</a><br />
+          <label>
+            Important
+            <input
+              type="checkbox"
+              :value="todo.important"
+              @click="markImportant(todo)"
+            />
+          </label>
+          <label>
+            Done
+            <input type="checkbox" :value="todo.done" @click="markDone(todo)" />
+          </label>
+        </li>
+      </ul>
+
+      <button @click="addTask()">New Task</button>
+    </div>
+    <script src="vue.js"></script>
+
+    <script>
+      //Vue Instance
+      let vm = new Vue({
+        el: "#app",
+        data: {
+          todoList: [],
+          newTask: {
+            title: "",
+            important: false,
+            done: false,
+          },
+        },
+        methods: {
+          addTask() {
+            this.todoList.push(this.newTask);
+            this.newTask = {
+              title: "",
+              important: false,
+            };
+          },
+          removeTask(task) {
+            this.todoList.splice(task, 1);
+          },
+          markImportant(task) {
+            task.important = !task.important;
+          },
+          markDone(task) {
+            task.done = !task.done;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

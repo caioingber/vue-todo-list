@@ -1,0 +1,7 @@
+.important {
+  font-weight: 600;
+}
+
+.complete {
+  text-decoration: line-through;
+}
